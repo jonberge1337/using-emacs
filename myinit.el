@@ -1,40 +1,28 @@
-#+STARTUP: overview 
-#+PROPERTY: header-args :comments yes :results silent
-* repos
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*repos][repos:1]]
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+;; repos:1 ends here
 
-#+END_SRC
-* interface tweaks
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*interface%20tweaks][interface tweaks:1]]
 (setq inhibit-startup-message t)
 (tool-bar-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-set-key (kbd "<f5>") 'revert-buffer)
-#+END_SRC
+;; interface tweaks:1 ends here
 
-* try
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*try][try:1]]
 (use-package try
 	:ensure t)
-#+END_SRC
+;; try:1 ends here
 
-* which key
-  Brings up some help
-  #+BEGIN_SRC emacs-lisp
-  (use-package which-key
-	:ensure t 
-	:config
-	(which-key-mode))
-  #+END_SRC
+;; [[file:~/.emacs.d/myinit.org::*which%20key][which key:1]]
+(use-package which-key
+      :ensure t 
+      :config
+      (which-key-mode))
+;; which key:1 ends here
 
-* Org mode
-
-
-  Org bullets makes things look pretty
-  #+BEGIN_SRC emacs-lisp
-
-    (use-package org 
+;; [[file:~/.emacs.d/myinit.org::*Org%20mode][Org mode:1]]
+(use-package org 
       :ensure t
       :pin org)
 
@@ -120,38 +108,24 @@
     (use-package htmlize :ensure t)
 
     (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
+;; Org mode:1 ends here
 
-  #+END_SRC
+;; [[file:~/.emacs.d/myinit.org::*Ace%20windows%20for%20easy%20window%20switching][Ace windows for easy window switching:1]]
+(use-package ace-window
+:ensure t
+:init
+(progn
+(setq aw-scope 'global) ;; was frame
+(global-set-key (kbd "C-x O") 'other-frame)
+  (global-set-key [remap other-window] 'ace-window)
+  (custom-set-faces
+   '(aw-leading-char-face
+     ((t (:inherit ace-jump-face-foreground :height 3.0))))) 
+  ))
+;; Ace windows for easy window switching:1 ends here
 
-  #+RESULTS:
-  : make-capture-frame
-
-* Ace windows for easy window switching
-  #+BEGIN_SRC emacs-lisp
-  (use-package ace-window
-  :ensure t
-  :init
-  (progn
-  (setq aw-scope 'global) ;; was frame
-  (global-set-key (kbd "C-x O") 'other-frame)
-    (global-set-key [remap other-window] 'ace-window)
-    (custom-set-faces
-     '(aw-leading-char-face
-       ((t (:inherit ace-jump-face-foreground :height 3.0))))) 
-    ))
-  #+END_SRC
-
-  #+RESULTS:
-
-* Swiper / Ivy / Counsel
-  Swiper gives us a really efficient incremental search with regular expressions
-  and Ivy / Counsel replace a lot of ido or helms completion functionality
-  #+BEGIN_SRC emacs-lisp
-  
-
-
-
-   (use-package counsel
+;; [[file:~/.emacs.d/myinit.org::*Swiper%20/%20Ivy%20/%20Counsel][Swiper / Ivy / Counsel:1]]
+(use-package counsel
 :ensure t
   :bind
   (("M-y" . counsel-yank-pop)
@@ -186,28 +160,15 @@
     (setq ivy-display-style 'fancy)
     (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
     ))
-  #+END_SRC
+;; Swiper / Ivy / Counsel:1 ends here
 
-* Avy - navigate by searching for a letter on the screen and jumping to it
-  See https://github.com/abo-abo/avy for more info
-  #+BEGIN_SRC emacs-lisp
-  (use-package avy
-  :ensure t
-  :bind ("M-s" . avy-goto-word-1)) ;; changed from char as per jcs
-  #+END_SRC
+;; [[file:~/.emacs.d/myinit.org::*Avy%20-%20navigate%20by%20searching%20for%20a%20letter%20on%20the%20screen%20and%20jumping%20to%20it][Avy - navigate by searching for a letter on the screen and jumping to it:1]]
+(use-package avy
+:ensure t
+:bind ("M-s" . avy-goto-word-1)) ;; changed from char as per jcs
+;; Avy - navigate by searching for a letter on the screen and jumping to it:1 ends here
 
-* Autocomplete
-  #+BEGIN_SRC emacs-lisp  :tangle no
-     (use-package auto-complete 
-     :ensure t
-     :init
-     (progn
-     (ac-config-default)
-       (global-auto-complete-mode t)
-      ))
-  #+END_SRC
-* Company
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Company][Company:1]]
 (use-package company
 :ensure t
 :config
@@ -236,14 +197,10 @@
 ;; company box mode
 ;(use-package company-box
 ;:ensure t
-;  :hook (company-mode . company-box-mode)) 
+;  :hook (company-mode . company-box-mode))
+;; Company:1 ends here
 
-
-#+END_SRC
-
-#+RESULTS:
-* C++
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*C++][C++:1]]
 (use-package company-irony
 :ensure t
 :config 
@@ -263,13 +220,10 @@
 :ensure t
 :config
 (add-hook 'irony-mode-hook #'irony-eldoc))
+;; C++:1 ends here
 
-
-#+END_SRC
-* Themes and modeline
-  #+BEGIN_SRC emacs-lisp 
-
-    (use-package color-theme-modern
+;; [[file:~/.emacs.d/myinit.org::*Themes%20and%20modeline][Themes and modeline:1]]
+(use-package color-theme-modern
       :ensure t)
     (use-package zenburn-theme
       :ensure t
@@ -303,81 +257,51 @@
 (doom-modeline-init)
 ;(load-theme 'faff t)
 (load-theme 'faff t)
-  #+END_SRC
+;; Themes and modeline:1 ends here
+
+;; [[file:~/.emacs.d/myinit.org::*Flycheck][Flycheck:1]]
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode t))
+;; Flycheck:1 ends here
+
+;; [[file:~/.emacs.d/myinit.org::*Python][Python:1]]
+(setq py-python-command "python3")
+(setq python-shell-interpreter "python3")
 
 
+    (use-package elpy
+    :ensure t
+    :config 
+    (elpy-enable))
 
-* Reveal.js
-  #+BEGIN_SRC emacs-lisp  :tangle no
-  (use-package ox-reveal
+(use-package virtualenvwrapper
   :ensure t
   :config
-    (require 'ox-reveal)
-    (setq org-reveal-root "http://cdn.jsdelivr.net/reveal.js/3.0.0/")
-    (setq org-reveal-mathjax t)
-)
-    (use-package htmlize
-    :ensure t)
-  #+END_SRC
+  (venv-initialize-interactive-shells)
+  (venv-initialize-eshell))
+;; Python:1 ends here
 
-  #+RESULTS:
-  : t
-  
-* Flycheck
-  #+BEGIN_SRC emacs-lisp
-    (use-package flycheck
-      :ensure t
-      :init
-      (global-flycheck-mode t))
-
-  #+END_SRC
-* Python
-  #+BEGIN_SRC emacs-lisp
-
-        (setq py-python-command "python3")
-        (setq python-shell-interpreter "python3")
- 
-
-            (use-package elpy
-            :ensure t
-            :config 
-            (elpy-enable))
-
-        (use-package virtualenvwrapper
-          :ensure t
-          :config
-          (venv-initialize-interactive-shells)
-          (venv-initialize-eshell))
-
-  #+END_SRC
-
-  #+RESULTS:
-  : t
-
-* Yasnippet
-  #+BEGIN_SRC emacs-lisp
-    (use-package yasnippet
+;; [[file:~/.emacs.d/myinit.org::*Yasnippet][Yasnippet:1]]
+(use-package yasnippet
       :ensure t
       :init
         (yas-global-mode 1))
 
 ;    (use-package yasnippet-snippets
 ;      :ensure t)
-  #+END_SRC
+;; Yasnippet:1 ends here
 
-  #+RESULTS:
+;; [[file:~/.emacs.d/myinit.org::*Undo%20Tree][Undo Tree:1]]
+(use-package undo-tree
+  :ensure t
+  :init
+  (global-undo-tree-mode))
+;; Undo Tree:1 ends here
 
-* Undo Tree
-  #+BEGIN_SRC emacs-lisp
-    (use-package undo-tree
-      :ensure t
-      :init
-      (global-undo-tree-mode))
-  #+END_SRC
-* Misc packages
-  #+BEGIN_SRC emacs-lisp
-
-  ; Highlights the current cursor line
+;; [[file:~/.emacs.d/myinit.org::*Misc%20packages][Misc packages:1]]
+; Highlights the current cursor line
   (global-hl-line-mode t)
   
   ; flashes the cursor's line when you scroll
@@ -411,77 +335,61 @@
 (setq auto-revert-verbose nil) ;; or this
 (global-set-key (kbd "<f5>") 'revert-buffer)
 (global-set-key (kbd "<f6>") 'revert-buffer)
+;; Misc packages:1 ends here
 
+;; [[file:~/.emacs.d/myinit.org::*iedit%20and%20narrow%20/%20widen%20dwim][iedit and narrow / widen dwim:1]]
+; mark and edit all copies of the marked region simultaniously. 
+(use-package iedit
+:ensure t)
 
-  
-  #+END_SRC
+; if you're windened, narrow to the region, if you're narrowed, widen
+; bound to C-x n
+(defun narrow-or-widen-dwim (p)
+"If the buffer is narrowed, it widens. Otherwise, it narrows intelligently.
+Intelligently means: region, org-src-block, org-subtree, or defun,
+whichever applies first.
+Narrowing to org-src-block actually calls `org-edit-src-code'.
 
-* iedit and narrow / widen dwim
+With prefix P, don't widen, just narrow even if buffer is already
+narrowed."
+(interactive "P")
+(declare (interactive-only))
+(cond ((and (buffer-narrowed-p) (not p)) (widen))
+((region-active-p)
+(narrow-to-region (region-beginning) (region-end)))
+((derived-mode-p 'org-mode)
+;; `org-edit-src-code' is not a real narrowing command.
+;; Remove this first conditional if you don't want it.
+(cond ((ignore-errors (org-edit-src-code))
+(delete-other-windows))
+((org-at-block-p)
+(org-narrow-to-block))
+(t (org-narrow-to-subtree))))
+(t (narrow-to-defun))))
 
-  #+BEGIN_SRC emacs-lisp
-  ; mark and edit all copies of the marked region simultaniously. 
-  (use-package iedit
-  :ensure t)
-  
-  ; if you're windened, narrow to the region, if you're narrowed, widen
-  ; bound to C-x n
-  (defun narrow-or-widen-dwim (p)
-  "If the buffer is narrowed, it widens. Otherwise, it narrows intelligently.
-  Intelligently means: region, org-src-block, org-subtree, or defun,
-  whichever applies first.
-  Narrowing to org-src-block actually calls `org-edit-src-code'.
-  
-  With prefix P, don't widen, just narrow even if buffer is already
-  narrowed."
-  (interactive "P")
-  (declare (interactive-only))
-  (cond ((and (buffer-narrowed-p) (not p)) (widen))
-  ((region-active-p)
-  (narrow-to-region (region-beginning) (region-end)))
-  ((derived-mode-p 'org-mode)
-  ;; `org-edit-src-code' is not a real narrowing command.
-  ;; Remove this first conditional if you don't want it.
-  (cond ((ignore-errors (org-edit-src-code))
-  (delete-other-windows))
-  ((org-at-block-p)
-  (org-narrow-to-block))
-  (t (org-narrow-to-subtree))))
-  (t (narrow-to-defun))))
-  
-  ;; (define-key endless/toggle-map "n" #'narrow-or-widen-dwim)
-  ;; This line actually replaces Emacs' entire narrowing keymap, that's
-  ;; how much I like this command. Only copy it if that's what you want.
-  (define-key ctl-x-map "n" #'narrow-or-widen-dwim)
-  
-  #+END_SRC
+;; (define-key endless/toggle-map "n" #'narrow-or-widen-dwim)
+;; This line actually replaces Emacs' entire narrowing keymap, that's
+;; how much I like this command. Only copy it if that's what you want.
+(define-key ctl-x-map "n" #'narrow-or-widen-dwim)
+;; iedit and narrow / widen dwim:1 ends here
 
+;; [[file:~/.emacs.d/myinit.org::*Web%20Mode][Web Mode:1]]
+(use-package web-mode
+    :ensure t
+    :config
+	 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+	 (add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
+	 (setq web-mode-engines-alist
+	       '(("django"    . "\\.html\\'")))
+	 (setq web-mode-ac-sources-alist
+	 '(("css" . (ac-source-css-property))
+	 ("vue" . (ac-source-words-in-buffer ac-source-abbrev))
+         ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+(setq web-mode-enable-auto-closing t))
+(setq web-mode-enable-auto-quoting t) ; this fixes the quote problem I mentioned
+;; Web Mode:1 ends here
 
-  #+RESULTS:
-  : narrow-or-widen-dwim
-
-* Web Mode
-#+BEGIN_SRC emacs-lisp
-    (use-package web-mode
-      :ensure t
-      :config
-	   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-	   (add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
-	   (setq web-mode-engines-alist
-		 '(("django"    . "\\.html\\'")))
-	   (setq web-mode-ac-sources-alist
-	   '(("css" . (ac-source-css-property))
-	   ("vue" . (ac-source-words-in-buffer ac-source-abbrev))
-           ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
-  (setq web-mode-enable-auto-closing t))
-  (setq web-mode-enable-auto-quoting t) ; this fixes the quote problem I mentioned
-
-
-#+END_SRC
-
-#+RESULTS:
-: t
-* Emmet mode
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Emmet%20mode][Emmet mode:1]]
 (use-package emmet-mode
 :ensure t
 :config
@@ -489,9 +397,9 @@
 (add-hook 'web-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
 (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
 )
-#+END_SRC
-* Javascript
-#+BEGIN_SRC emacs-lisp
+;; Emmet mode:1 ends here
+
+;; [[file:~/.emacs.d/myinit.org::*Javascript][Javascript:1]]
 (use-package js2-mode
 :ensure t
 :ensure ac-js2
@@ -554,10 +462,9 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
 (add-hook 'web-mode-hook  'my-web-mode-hook)
-#+END_SRC 
+;; Javascript:1 ends here
 
-* DIRED
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*DIRED][DIRED:1]]
 ; wiki melpa problem
 ;(use-package dired+
 ;  :ensure t
@@ -580,17 +487,10 @@
   :config
   (bind-key "<tab>" #'dired-subtree-toggle dired-mode-map)
   (bind-key "<backtab>" #'dired-subtree-cycle dired-mode-map))
+;; DIRED:1 ends here
 
-
-#+END_SRC
-
-#+RESULTS:
-: t
-
-* Stuff to refile as I do more Screencasts
-#+BEGIN_SRC emacs-lisp
-
-    ;;--------------------------------------------------------------------------
+;; [[file:~/.emacs.d/myinit.org::*Stuff%20to%20refile%20as%20I%20do%20more%20Screencasts][Stuff to refile as I do more Screencasts:1]]
+;;--------------------------------------------------------------------------
     ;; latex
     (use-package tex
     :ensure auctex)
@@ -652,12 +552,10 @@
     ;; (define-key ctl-x-map [(control ?-)] 'zoom-in/out)
     ;; (define-key ctl-x-map [(control ?=)] 'zoom-in/out)
     (define-key ctl-x-map [(control ?0)] 'zoom-in/out)
+;; Stuff to refile as I do more Screencasts:1 ends here
 
-
-#+END_SRC
-* Hydra
-#+BEGIN_SRC emacs-lisp
-  (use-package hydra 
+;; [[file:~/.emacs.d/myinit.org::*Hydra][Hydra:1]]
+(use-package hydra 
     :ensure hydra
     :init 
     (global-set-key
@@ -732,14 +630,10 @@
   ("<mouse-1>" mc/add-cursor-on-click)
   ("<down-mouse-1>" ignore)
   ("<drag-mouse-1>" ignore))
+;; Hydra:1 ends here
 
-#+END_SRC
-
-#+RESULTS:
-
-* git
-#+BEGIN_SRC emacs-lisp
-  (use-package magit
+;; [[file:~/.emacs.d/myinit.org::*git][git:1]]
+(use-package magit
     :ensure t
     :init
     (progn
@@ -786,167 +680,26 @@
                 (sit-for 0.1)
                 (git-gutter:clear))
          :color blue))
+;; git:1 ends here
 
+;; [[file:~/.emacs.d/myinit.org::*Load%20other%20files][Load other files:1]]
+(defun load-if-exists (f)
+  "load the elisp file only if it exists and is readable"
+  (if (file-readable-p f)
+      (load-file f)))
 
+(load-if-exists "~/Sync/shared/mu4econfig.el")
+(load-if-exists "~/Sync/shared/not-for-github.el")
+;; Load other files:1 ends here
 
-#+END_SRC
-* Load other files
-   #+BEGIN_SRC emacs-lisp
-     (defun load-if-exists (f)
-       "load the elisp file only if it exists and is readable"
-       (if (file-readable-p f)
-           (load-file f)))
-
-     (load-if-exists "~/Sync/shared/mu4econfig.el")
-     (load-if-exists "~/Sync/shared/not-for-github.el")
-
-   #+END_SRC
-
-   #+RESULTS:
-   : t
-* Testing Stuff
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Testing%20Stuff][Testing Stuff:1]]
 (add-hook 'org-mode-hook 'turn-on-flyspell)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 (add-hook 'mu4e-compose-mode-hook 'turn-on-flyspell)
 (add-hook 'mu4e-compose-mode-hook 'turn-on-auto-fill)
+;; Testing Stuff:1 ends here
 
-#+END_SRC
-* Better Shell
-#+BEGIN_SRC emacs-lisp :tangle no
-  (use-package better-shell
-      :ensure t
-      :bind (("C-\"" . better-shell-shell)
-             ("C-:" . better-shell-remote-open)))
-#+END_SRC
-
-#+RESULTS:
-: better-shell-remote-open
-
-* Elfeed
-#+BEGIN_SRC emacs-lisp :tangle no
-
-    (setq elfeed-db-directory "~/Sync/shared/elfeeddb")
-
-
-    (defun elfeed-mark-all-as-read ()
-	  (interactive)
-	  (mark-whole-buffer)
-	  (elfeed-search-untag-all-unread))
-
-
-    ;;functions to support syncing .elfeed between machines
-    ;;makes sure elfeed reads index from disk before launching
-    (defun bjm/elfeed-load-db-and-open ()
-      "Wrapper to load the elfeed db from disk before opening"
-      (interactive)
-      (elfeed-db-load)
-      (elfeed)
-      (elfeed-search-update--force))
-
-    ;;write to disk when quiting
-    (defun bjm/elfeed-save-db-and-bury ()
-      "Wrapper to save the elfeed db to disk before burying buffer"
-      (interactive)
-      (elfeed-db-save)
-      (quit-window))
-
-
-
-
-    (use-package elfeed
-      :ensure t
-      :bind (:map elfeed-search-mode-map
-		  ("q" . bjm/elfeed-save-db-and-bury)
-		  ("Q" . bjm/elfeed-save-db-and-bury)
-		  ("m" . elfeed-toggle-star)
-		  ("M" . elfeed-toggle-star)
-		  ("j" . mz/make-and-run-elfeed-hydra)
-		  ("J" . mz/make-and-run-elfeed-hydra)
-		  )
-:config
-    (defalias 'elfeed-toggle-star
-      (elfeed-expose #'elfeed-search-toggle-all 'star))
-
-      )
-
-    (use-package elfeed-goodies
-      :ensure t
-      :config
-      (elfeed-goodies/setup))
-
-
-    (use-package elfeed-org
-      :ensure t
-      :config
-      (elfeed-org)
-      (setq rmh-elfeed-org-files (list "~/Sync/shared/elfeed.org")))
-
-
-
-
-
-  (defun z/hasCap (s) ""
-	 (let ((case-fold-search nil))
-	 (string-match-p "[[:upper:]]" s)
-	 ))
-
-
-  (defun z/get-hydra-option-key (s)
-    "returns single upper case letter (converted to lower) or first"
-    (interactive)
-    (let ( (loc (z/hasCap s)))
-      (if loc
-	  (downcase (substring s loc (+ loc 1)))
-	(substring s 0 1)
-      )))
-
-  ;;  (active blogs cs eDucation emacs local misc sports star tech unread webcomics)
-  (defun mz/make-elfeed-cats (tags)
-    "Returns a list of lists. Each one is line for the hydra configuratio in the form
-       (c function hint)"
-    (interactive)
-    (mapcar (lambda (tag)
-	      (let* (
-		     (tagstring (symbol-name tag))
-		     (c (z/get-hydra-option-key tagstring))
-		     )
-		(list c (append '(elfeed-search-set-filter) (list (format "@6-months-ago +%s" tagstring) ))tagstring  )))
-	    tags))
-
-
-
-
-  
-  (defmacro mz/make-elfeed-hydra ()
-    `(defhydra mz/hydra-elfeed ()
-       "filter"
-       ,@(mz/make-elfeed-cats (elfeed-db-get-all-tags))
-       ("*" (elfeed-search-set-filter "@6-months-ago +star") "Starred")
-       ("M" elfeed-toggle-star "Mark")
-       ("A" (elfeed-search-set-filter "@6-months-ago") "All")
-       ("T" (elfeed-search-set-filter "@1-day-ago") "Today")
-       ("Q" bjm/elfeed-save-db-and-bury "Quit Elfeed" :color blue)
-       ("q" nil "quit" :color blue)
-       ))
-
-
-
-
-    (defun mz/make-and-run-elfeed-hydra ()
-      ""
-      (interactive)
-      (mz/make-elfeed-hydra)
-      (mz/hydra-elfeed/body))
-
-
-#+END_SRC
-
-#+RESULTS:
-: mz/make-and-run-elfeed-hydra
-
-* c++
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*c++][c++:1]]
 (use-package ggtags
 :ensure t
 :config 
@@ -955,21 +708,16 @@
             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
               (ggtags-mode 1))))
 )
+;; c++:1 ends here
 
-#+END_SRC
-
-#+RESULTS:
-
-* Clojure
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Clojure][Clojure:1]]
 (use-package cider
 :disabled)
 
 ;(add-to-list 'exec-path "/home/zamansky/bin/")
-#+END_SRC
-* Dumb jump
-#+BEGIN_SRC emacs-lisp
+;; Clojure:1 ends here
 
+;; [[file:~/.emacs.d/myinit.org::*Dumb%20jump][Dumb jump:1]]
 (use-package dumb-jump
   :bind (("M-g o" . dumb-jump-go-other-window)
          ("M-g j" . dumb-jump-go)
@@ -981,72 +729,61 @@
 (dumb-jump-mode)
   :ensure
 )
+;; Dumb jump:1 ends here
 
-
-
-#+END_SRC
-* Origami folding
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Origami%20folding][Origami folding:1]]
 (use-package origami
 :ensure t)
-#+END_SRC
+;; Origami folding:1 ends here
 
-#+RESULTS:
+;; [[file:~/.emacs.d/myinit.org::*IBUFFER][IBUFFER:1]]
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+               ("dired" (mode . dired-mode))
+               ("org" (name . "^.*org$"))
+               ("magit" (mode . magit-mode))
+               ("IRC" (or (mode . circe-channel-mode) (mode . circe-server-mode)))
+               ("web" (or (mode . web-mode) (mode . js2-mode)))
+               ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
+               ("mu4e" (or
 
-* IBUFFER
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-x C-b") 'ibuffer)
-  (setq ibuffer-saved-filter-groups
-        (quote (("default"
-                 ("dired" (mode . dired-mode))
-                 ("org" (name . "^.*org$"))
-                 ("magit" (mode . magit-mode))
-                 ("IRC" (or (mode . circe-channel-mode) (mode . circe-server-mode)))
-                 ("web" (or (mode . web-mode) (mode . js2-mode)))
-                 ("shell" (or (mode . eshell-mode) (mode . shell-mode)))
-                 ("mu4e" (or
+                        (mode . mu4e-compose-mode)
+                        (name . "\*mu4e\*")
+                        ))
+               ("programming" (or
+                               (mode . clojure-mode)
+                               (mode . clojurescript-mode)
+                               (mode . python-mode)
+                               (mode . c++-mode)))
+               ("emacs" (or
+                         (name . "^\\*scratch\\*$")
+                         (name . "^\\*Messages\\*$")))
+               ))))
+(add-hook 'ibuffer-mode-hook
+          (lambda ()
+            (ibuffer-auto-mode 1)
+            (ibuffer-switch-to-saved-filter-groups "default")))
 
-                          (mode . mu4e-compose-mode)
-                          (name . "\*mu4e\*")
-                          ))
-                 ("programming" (or
-                                 (mode . clojure-mode)
-                                 (mode . clojurescript-mode)
-                                 (mode . python-mode)
-                                 (mode . c++-mode)))
-                 ("emacs" (or
-                           (name . "^\\*scratch\\*$")
-                           (name . "^\\*Messages\\*$")))
-                 ))))
-  (add-hook 'ibuffer-mode-hook
-            (lambda ()
-              (ibuffer-auto-mode 1)
-              (ibuffer-switch-to-saved-filter-groups "default")))
+;; don't show these
+                                        ;(add-to-list 'ibuffer-never-show-predicates "zowie")
+;; Don't show filter groups if there are no buffers in that group
+(setq ibuffer-show-empty-filter-groups nil)
 
-  ;; don't show these
-                                          ;(add-to-list 'ibuffer-never-show-predicates "zowie")
-  ;; Don't show filter groups if there are no buffers in that group
-  (setq ibuffer-show-empty-filter-groups nil)
+;; Don't ask for confirmation to delete marked buffers
+(setq ibuffer-expert t)
+;; IBUFFER:1 ends here
 
-  ;; Don't ask for confirmation to delete marked buffers
-  (setq ibuffer-expert t)
-
-#+END_SRC
-* Prodigy
-#+BEGIN_SRC emacs-lisp
-    (use-package prodigy
+;; [[file:~/.emacs.d/myinit.org::*Prodigy][Prodigy:1]]
+(use-package prodigy
     :ensure t
     :config
     (load-if-exists "~/Sync/shared/prodigy-services.el")
 )
-#+END_SRC
+;; Prodigy:1 ends here
 
-#+RESULTS:
-: t
-
-* Treemacs
-#+BEGIN_SRC emacs-lisp
-  (use-package treemacs
+;; [[file:~/.emacs.d/myinit.org::*Treemacs][Treemacs:1]]
+(use-package treemacs
     :ensure t
     :defer t
     :config
@@ -1081,14 +818,9 @@
     :config
     (setq treemacs-header-function #'treemacs-projectile-create-header)
 )
+;; Treemacs:1 ends here
 
-#+END_SRC
-
-#+RESULTS:
-
-* misc
-#+BEGIN_SRC emacs-lisp
-
+;; [[file:~/.emacs.d/myinit.org::*misc][misc:1]]
 (use-package aggressive-indent
 :ensure t
 :config
@@ -1107,13 +839,9 @@
 (ace-swap-window)
 (aw-flip-window)
 )
+;; misc:1 ends here
 
-#+END_SRC
-
-#+RESULTS:
-: z/nikola-deploy
-* Haskell 
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Haskell][Haskell:1]]
 (use-package haskell-mode
 :ensure t
 :config
@@ -1122,10 +850,9 @@
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
 )
+;; Haskell:1 ends here
 
-#+END_SRC
-* personal keymap
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*personal%20keymap][personal keymap:1]]
 ;; unset C- and M- digit keys
 ;(dotimes (n 10)
 ;  (global-unset-key (kbd (format "C-%d" n)))
@@ -1179,15 +906,9 @@
 (global-set-key (kbd "<end>") 'move-end-of-line)
 
 (global-set-key [mouse-3] 'flyspell-correct-word-before-point)
+;; personal keymap:1 ends here
 
-#+END_SRC
-
-#+RESULTS:
-: origami-toggle-node
-
-#  LocalWords:  DIRED Javascript Screencasts Autocomplete
-* Wgrep
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Wgrep][Wgrep:1]]
 (use-package wgrep
 :ensure t
 )
@@ -1195,52 +916,36 @@
 :ensure t
 )
 (require 'wgrep-ag)
-#+END_SRC
+;; Wgrep:1 ends here
 
-#+RESULTS:
-* Silversearcher
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Silversearcher][Silversearcher:1]]
 (use-package ag
 :ensure t)
+;; Silversearcher:1 ends here
 
-#+END_SRC
-* Regex
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Regex][Regex:1]]
 (use-package pcre2el
 :ensure t
 :config 
 (pcre-mode)
 )
-#+END_SRC
-* Eyebrowse
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package eyebrowse
-:ensure t
-:config 
-(eyebrowse-mode)
-)
+;; Regex:1 ends here
 
-#+END_SRC
-
-#+RESULTS:
-
-* Music
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Music][Music:1]]
 (use-package simple-mpc
 :ensure t)
 (use-package mingus
 :ensure t)
+;; Music:1 ends here
 
-#+END_SRC
-* Atomic Chrome (edit in emacs)
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Atomic%20Chrome%20(edit%20in%20emacs)][Atomic Chrome (edit in emacs):1]]
 (use-package atomic-chrome
 :ensure t
 :config (atomic-chrome-start-server))
 (setq atomic-chrome-buffer-open-style 'frame)
-#+END_SRC
-* PDF tools
-#+BEGIN_SRC emacs-lisp
+;; Atomic Chrome (edit in emacs):1 ends here
+
+;; [[file:~/.emacs.d/myinit.org::*PDF%20tools][PDF tools:1]]
 (use-package pdf-tools
 :ensure t)
 (use-package org-pdfview
@@ -1248,23 +953,15 @@
 
 (require 'pdf-tools)
 (require 'org-pdfview)
+;; PDF tools:1 ends here
 
-#+END_SRC
-* auto-yasnippet
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*auto-yasnippet][auto-yasnippet:1]]
 (use-package auto-yasnippet
 :ensure t)
-#+END_SRC
-* mu4e-conversation
-#+BEGIN_SRC emacs-lisp :tangle no
-(use-package mu4e-conversation
-:ensure t
-)
+;; auto-yasnippet:1 ends here
 
-#+END_SRC
-* Unfill region and paragraph
-#+BEGIN_SRC emacs-lisp
-  ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
+;; [[file:~/.emacs.d/myinit.org::*Unfill%20region%20and%20paragraph][Unfill region and paragraph:1]]
+;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
     (defun unfill-paragraph (&optional region)
       "Takes a multi-line paragraph and makes it into a single line of text."
       (interactive (progn (barf-if-buffer-read-only) '(t)))
@@ -1280,31 +977,26 @@
   (interactive "*r")
   (let ((fill-column (point-max)))
     (fill-region beg end)))
+;; Unfill region and paragraph:1 ends here
 
-
-#+END_SRC
-* Easy kill
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Easy%20kill][Easy kill:1]]
 (use-package easy-kill
   :ensure t
   :config
   (global-set-key [remap kill-ring-save] #'easy-kill)
   (global-set-key [remap mark-sexp] #'easy-mark))
+;; Easy kill:1 ends here
 
-#+END_SRC
+;; [[file:~/.emacs.d/myinit.org::*PATH][PATH:1]]
+(use-package exec-path-from-shell
+  :if (memq window-system '(windows-nt))
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize)
+  )
+;; PATH:1 ends here
 
-* PATH 
-#+BEGIN_SRC emacs-lisp
-  (use-package exec-path-from-shell
-    :if (memq window-system '(windows-nt))
-    :ensure t
-    :config
-    (exec-path-from-shell-initialize)
-    )
-#+END_SRC
-* Counsel-spotify
-#+begin_src emacs-lisp
-
+;; [[file:~/.emacs.d/myinit.org::*Counsel-spotify][Counsel-spotify:1]]
 (setq counsel-spotify-client-id "ce31becb1af94921907671e4bfa7f558")
 (setq counsel-spotify-client-secret "9433b011b7094b2b8c4eb0255b8249e3")
 (use-package counsel-spotify
@@ -1312,39 +1004,34 @@
 :config
 (require 'counsel-spotify)
 )
-#+end_src
-* Misc
+;; Counsel-spotify:1 ends here
 
-
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Misc][Misc:1]]
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "chromium-browser")
 
 (setq auto-window-vscroll nil)
+;; Misc:1 ends here
 
-#+END_SRC
+;; [[file:~/.emacs.d/myinit.org::*Keyfreq][Keyfreq:1]]
+(use-package keyfreq
+  :ensure t
+  :config
+  (require 'keyfreq)
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1)
+  )
+;; Keyfreq:1 ends here
 
-* Keyfreq
-#+BEGIN_SRC emacs-lisp
-  (use-package keyfreq
-    :ensure t
-    :config
-    (require 'keyfreq)
-    (keyfreq-mode 1)
-    (keyfreq-autosave-mode 1)
-    )
-#+END_SRC
-* Word stuff
-#+BEGIN_SRC emacs-lisp
-  (use-package dictionary
-    :ensure t)
+;; [[file:~/.emacs.d/myinit.org::*Word%20stuff][Word stuff:1]]
+(use-package dictionary
+  :ensure t)
 
-  (use-package synosaurus
-    :ensure t)
+(use-package synosaurus
+  :ensure t)
+;; Word stuff:1 ends here
 
-#+END_SRC
-* Rust
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Rust][Rust:1]]
 ;; don't forget to install racer:
 ;; rustup toolchain add nightly
 ;; cargo +nightly install racer
@@ -1375,25 +1062,22 @@
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
   (add-hook 'rust-mode-hook 'flycheck-mode))
+;; Rust:1 ends here
 
-#+END_SRC
-* Ripgrep
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Ripgrep][Ripgrep:1]]
 (use-package deadgrep 
 :ensure t)
 
 (use-package rg
 :ensure t
 :commands rg)
+;; Ripgrep:1 ends here
 
-#+END_SRC
-* Fzf
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*Fzf][Fzf:1]]
 (use-package fzf :ensure t)
-#+END_SRC
-* All the icons
+;; Fzf:1 ends here
 
-#+BEGIN_SRC emacs-lisp
+;; [[file:~/.emacs.d/myinit.org::*All%20the%20icons][All the icons:1]]
 (use-package all-the-icons 
 :disabled
 :defer 0.5)
@@ -1413,5 +1097,4 @@
 )
 
 ;;(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-
-#+END_SRC
+;; All the icons:1 ends here
